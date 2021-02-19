@@ -3,3 +3,9 @@ While returning from a protest that was more dangerous than I was expecting, I d
 > With traditional digital files, it's trivial to cryptographically sign a PDF with GPG. However, digital files are ephemeral. If I'm dead, any files I host online are gone as soon as I stop paying rent. How can I get the same assurances of mathematically provable authenticity and authorship on a printed document?
 
 After struggling with this question for 4 days, I finally reached a format that proves the authorship and authenticity of every character of a letter in a way that can be independently verified without any guesswork about formatting. This project, SecureLetter, is about making verifiable printed letters easy to make for anyone with GPG and Python installed on a Linux machine.
+
+## Usage
+### Example Letter
+
+
+## Rendering
