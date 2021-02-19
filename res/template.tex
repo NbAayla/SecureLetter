@@ -1,0 +1,56 @@
+% Copyright (C) 2021 Aayla Semyonova
+% 
+% This file is part of SecureLetter.
+% 
+% SecureLetter is free software: you can redistribute it and/or modify
+% it under the terms of the GNU General Public License as published by
+% the Free Software Foundation, either version 3 of the License, or
+% (at your option) any later version.
+% 
+% SecureLetter is distributed in the hope that it will be useful,
+% but WITHOUT ANY WARRANTY; without even the implied warranty of
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+% GNU General Public License for more details.
+% 
+% You should have received a copy of the GNU General Public License
+% along with SecureLetter.  If not, see <http://www.gnu.org/licenses/>.
+
+\documentclass[a4paper,12pt]{texMemo}
+\usepackage[english,main=portuguese]{babel} % Defines Main language
+% \usepackage[utf8]{inputenc}
+\usepackage{iflang}
+\usepackage{ifthen}
+\usepackage{parskip}
+\usepackage{qrcode}
+\usepackage{pst-barcode}
+\usepackage{endnotes}
+\usepackage{multicol}
+\setlength{\parindent}{15pt}
+
+\newcounter{para}
+\newcommand\para{\noindent \par\refstepcounter{para}\textbf{\thepara.}\space}
+\usepackage{letltxmacro}
+\LetLtxMacro\itemold\item
+\renewcommand{\item}{\itemindent24pt\itemold}
+
+\usepackage{fontspec}
+\setmainfont{Calibri.ttf}
+\begin{document}
+\maketitle{!!!TITLE!!!}
+!!!CONTENT!!!
+\noindent \para The SHA-256 sums of the assertions in this letter are enumerated below in the OCR-B font. The SHA-256 sum of those newline separated sums (!!!FINALSUM_AB!!!) is in the following PDF417 barcode. My (Replace this with your GPG fingerprint) signature of that sum proving my authorship of this letter is stored in the QR code on the final page. This declaration is the only one not hashed below.
+\begin{center}
+    \noindent \begin{pspicture}(2.1in,0.75in)
+        \psbarcode{!!!FINALSUM!!!}{}{pdf417}
+    \end{pspicture}\quad\\
+    \end{center}
+\newpage
+\setmainfont{OcrB Regular.ttf}
+\theendnotes
+\newpage
+\begin{center}
+    \noindent \qrcode[height=3in]{
+        Replace this with your detached GPG signature of !!!FINALSUM!!!
+    }
+\end{center}
+\end{document}

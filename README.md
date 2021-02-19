@@ -7,5 +7,6 @@ After struggling with this question for 4 days, I finally reached a format that 
 ## Usage
 ### Example Letter
 
-
 ## Rendering
+## Credit
+The LaTeX template used to make these letters is a heavily modified version of Rob Oakes's Memo class.
