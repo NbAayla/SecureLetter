@@ -5,7 +5,7 @@ While returning from a protest that was more dangerous than I was expecting, I d
 After struggling with this question for 4 days, I finally reached a format that proves the authorship and authenticity of every character of a letter in a way that can be independently verified without any guesswork about formatting. This project, SecureLetter, is about making verifiable printed letters easy to make for anyone with GPG and Python installed on a Linux machine.
 
 ## Usage
-To create a crpyotgraphically signed and tamper-evident letter, create an appropriately formatted YAML file and run `python create myletter.yaml`. The output **MUST** be rendered with XeLaTeX.
+To create a crpyotgraphically signed and tamper-evident letter, create an appropriately formatted YAML file and run `python main.py create myletter.yaml`. The output **MUST** be rendered with XeLaTeX.
 ### Example Letter
 The `letter.yaml` file is included as an example letter.
 ```yaml
