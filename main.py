@@ -58,11 +58,22 @@ def generate_letter(path):
     for section in yaml_content["content"]:
         content += "\section{" + section + "}\n"
         for item in yaml_content["content"][section]:
-            encoded = item.encode()
-            sha = hashlib.sha256(encoded).hexdigest()
-            sums.append(sha)
-            content += f"\para {item}"
-            content += "\endnote{" + sha + "}\n"
+            if type(item) == str:
+                sha = hashlib.sha256(item.encode()).hexdigest()
+                sums.append(sha)
+                content += f"\para {item}"
+                content += "\endnote{" + sha + "}\n"
+            if type(item) == dict:
+                for part in item:
+                    sums.append(sha)
+                    content += f"\para {part}" + "\\begin{enumerate}\n"
+                    for line in item[part]:
+                        content += f"\item {line}"
+                        sha = hashlib.sha256(line.encode()).hexdigest()
+                        sums.append(sha)
+                        content += "\endnote{" + sha + "}\n"
+                content += "\\end{enumerate}\n"
+
     # Apply final_content to final_output
     final_output = final_output.replace("!!!CONTENT!!!", content)
     # Create FINALSUM
