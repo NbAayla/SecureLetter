@@ -1,3 +1,5 @@
+[![GPLv3 License](https://img.shields.io/badge/License-GPL%20v3-yellow.svg?style=flat-square)](https://opensource.org/licenses/)
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/NbAayla/SecureLetter?style=flat-square)
 # SecureLetter
 While returning from a protest that was more dangerous than I was expecting, I decided it was important to convey my last wishes in a letter. However, this lead to a critical question that I had to answer.
 > With traditional digital files, it's trivial to cryptographically sign a PDF with GPG. However, digital files are ephemeral. If I'm dead, any files I host online are gone as soon as I stop paying rent. How can I get the same assurances of mathematically provable authenticity and authorship on a printed document?
