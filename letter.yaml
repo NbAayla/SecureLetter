@@ -7,3 +7,7 @@ content:
   Section 2:
     - Third Important Declaration
     - Fourth Impotant Declaration
+  Section 3:
+    - Fifth Declaration with enumeration:
+      - Item 1
+      - Item 2
