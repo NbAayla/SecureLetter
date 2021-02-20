@@ -78,7 +78,7 @@ cat sums.txt | tr "\n" "," | sha256sum | cut -d " " -f 1 > finalsum.txt
 cat finalsum.txt
 \end{lstlisting}
 \subsection{GPG Signature}
-Ensure that the cryptographic signature is valid for the public key of the author. The availability of this key is the responsibility of the author. If this system was used correctly, the above QR Code should contain a detached PGP signature. For the example below, place the QR code content in a file called finalsum.txt.asc.
+Ensure that the cryptographic signature is valid for the public key of the author. The availability of this key is the responsibility of the author. If this system was used correctly, the above QR Code contains a detached PGP signature. For the example below, place the QR code content in a file called finalsum.txt.asc.
 \begin{lstlisting}
 gpg --verify finalsum.txt.asc
 \end{lstlisting}
