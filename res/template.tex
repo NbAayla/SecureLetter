@@ -72,7 +72,7 @@ echo "!!!FIRSTITEM!!!" | sha256sum | cut -d " " -f 1 >> sums.txt
 \subsection{SHA-256 Sum of Collective Sums}
 Ensure that the SHA-256 sum of the collective sums in the endnotes section is equivalent to the content\footnote{!!!FINALSUM!!! for this document} of the PDF417 barcode at the end of the document. The sums should be comma-separated with no whitespace.
 \begin{lstlisting}
-cat sums.txt | tr "\n" "," |sha256sum
+cat sums.txt | tr "\n" "," | sha256sum
 \end{lstlisting}
 \subsection{GPG Signature}
 Ensure that the cryptographic signature is valid for the public key of the author. The availability of this key is the responsibility of the author. If this system was used correctly, the above QR Code should contain a detached PGP signature. For the example below, place the QR code content in a file called finalsum.txt.asc.
