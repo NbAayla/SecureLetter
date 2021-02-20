@@ -51,6 +51,7 @@ def generate_letter(path):
     
     content = ""
     sums = []
+    firstitem = None
 
     # Add title to final output
     final_output = final_output.replace("!!!TITLE!!!", yaml_content["title"])
@@ -59,17 +60,22 @@ def generate_letter(path):
         content += "\section{" + section + "}\n"
         for item in yaml_content["content"][section]:
             if type(item) == str:
-                sha = hashlib.sha256(item.encode()).hexdigest()
+                if firstitem is None:
+                    firstitem = item
+                sha = hashlib.sha256((item + "\n").encode()).hexdigest()
                 sums.append(sha)
                 content += f"\para {item}"
                 content += "\endnote{" + sha + "}\n"
             if type(item) == dict:
                 for part in item:
+                    if firstitem is None:
+                        firstitem = part
+                    sha = hashlib.sha256((part + "\n").encode()).hexdigest()
                     sums.append(sha)
-                    content += f"\para {part}" + "\\begin{enumerate}\n"
+                    content += f"\para {part}\endnote" + "{" + sha + "}\\begin{enumerate}\n"
                     for line in item[part]:
                         content += f"\item {line}"
-                        sha = hashlib.sha256(line.encode()).hexdigest()
+                        sha = hashlib.sha256((line + "\n").encode()).hexdigest()
                         sums.append(sha)
                         content += "\endnote{" + sha + "}\n"
                 content += "\\end{enumerate}\n"
@@ -77,14 +83,20 @@ def generate_letter(path):
     # Apply final_content to final_output
     final_output = final_output.replace("!!!CONTENT!!!", content)
     # Create FINALSUM
-    finalsum = "\n".join(sums).encode()
+    finalsum = (",".join(sums) + "\n").encode()
     finalsum = hashlib.sha256(finalsum).hexdigest()
     final_output = final_output.replace("!!!FINALSUM!!!", finalsum)
-    # Creat FINALSUM_AB
+    # Create FINALSUM_AB
     finalsum_ab = finalsum[:4] + "..." + finalsum[-4:]
     final_output = final_output.replace("!!!FINALSUM_AB!!!", finalsum_ab)
+    # Create FIRSTITEM
+    final_output = final_output.replace("!!!FIRSTITEM!!!", firstitem)
     # Print final output
     print(final_output)
+    # print(",".join(sums))
+
+def validate_letter():
+    pass
 
 # Execute provided subcommand
 if arguments.subparser_name == "create":
