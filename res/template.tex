@@ -39,7 +39,7 @@
 \maketitle{!!!TITLE!!!}
 !!!CONTENT!!!
 \section{Proof}
-\noindent \para The SHA-256 sums of the assertions in this letter are enumerated below in the OCR-B font. The SHA-256 sum of those comma separated sums (!!!FINALSUM_AB!!!) is in the following PDF417 barcode. My (Replace this with your GPG fingerprint) signature of that sum proving my authorship of this letter is stored in the QR code on the final page. This declaration is the only one not hashed below.
+\noindent \para The SHA-256 sums of the assertions in this letter are enumerated below in the OCR-B font. The SHA-256 sum of those comma separated sums (!!!FINALSUM_AB!!!) is in the following PDF417 barcode. My (!!!FINGERPRINT!!!) signature of that sum proving my authorship of this letter is stored in the QR code on the final page. This declaration is the only one not hashed below.
 \begin{center}
     \noindent \begin{pspicture}(2.1in,0.75in)
         \psbarcode{!!!FINALSUM!!!}{}{pdf417}
@@ -68,16 +68,17 @@
 Ensure the sum of every declaration is identical to that given in the endnotes. Only do this for lines with an endnote number at the end and do not include the number. Use the cut command to remove the filename from the output of sha256sum so only the hash is written to sums.txt. For example:
 \begin{lstlisting}
 echo "!!!FIRSTITEM!!!" | sha256sum | cut -d " " -f 1 >> sums.txt
+cat sums.txt # Run this when finished with all sums
 \end{lstlisting}
 \subsection{SHA-256 Sum of Collective Sums}
-Ensure that the SHA-256 sum of the collective sums in the endnotes section is equivalent to the content\footnote{!!!FINALSUM!!! for this document} of the PDF417 barcode at the end of the document. The sums should be comma-separated with no whitespace.
+Ensure that the SHA-256 sum of the collective sums in the endnotes section is equivalent to the content\footnote{!!!FINALSUM!!! for this document} of the PDF417 barcode at the end of the document. The sums should be comma-separated with a trailing comma and have no whitespace.
 \begin{lstlisting}
-cat sums.txt | tr "\n" "," | sha256sum
+cat sums.txt | tr "\n" "," | sha256sum | cut -d " " -f 1 > finalsum.txt
+cat finalsum.txt
 \end{lstlisting}
 \subsection{GPG Signature}
 Ensure that the cryptographic signature is valid for the public key of the author. The availability of this key is the responsibility of the author. If this system was used correctly, the above QR Code should contain a detached PGP signature. For the example below, place the QR code content in a file called finalsum.txt.asc.
 \begin{lstlisting}
-echo "!!!FINALSUM!!!" > finalsum.txt
 gpg --verify finalsum.txt.asc
 \end{lstlisting}
 \end{document}

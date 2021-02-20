@@ -83,7 +83,7 @@ def generate_letter(path):
     # Apply final_content to final_output
     final_output = final_output.replace("!!!CONTENT!!!", content)
     # Create FINALSUM
-    finalsum = (",".join(sums) + "\n").encode()
+    finalsum = (",".join(sums) + ",").encode()
     finalsum = hashlib.sha256(finalsum).hexdigest()
     final_output = final_output.replace("!!!FINALSUM!!!", finalsum)
     # Create FINALSUM_AB
@@ -91,6 +91,8 @@ def generate_letter(path):
     final_output = final_output.replace("!!!FINALSUM_AB!!!", finalsum_ab)
     # Create FIRSTITEM
     final_output = final_output.replace("!!!FIRSTITEM!!!", firstitem)
+    # Create FINGERPRINT
+    final_output = final_output.replace("!!!FINGERPRINT!!!", yaml_content["fingerprint"])
     # Print final output
     print(final_output)
     # print(",".join(sums))
