@@ -67,7 +67,8 @@
 \subsection{SHA-256 Sums Of Each Line}
 Ensure the sum of every declaration is identical to that given in the endnotes. Only do this for lines with an endnote number at the end and do not include the number. Use the cut command to remove the filename from the output of sha256sum so only the hash is written to sums.txt. For example:
 \begin{lstlisting}
-echo "!!!FIRSTITEM!!!" | sha256sum | cut -d " " -f 1 >> sums.txt
+sum() { echo $1 | sha256sum | cut -d " " -f 1 }
+sum "!!!FIRSTITEM!!!" >> sums.txt
 cat sums.txt # Run this when finished with all sums
 \end{lstlisting}
 \subsection{SHA-256 Sum of Collective Sums}
